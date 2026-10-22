@@ -1,0 +1,99 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidProjectPayload(data) {
+      return data.projectName is string &&
+        data.projectName.size() > 0 &&
+        data.projectName.size() <= 200 &&
+        data.clientName is string &&
+        data.clientName.size() <= 200;
+    }
+
+    function isValidServicePayload(data) {
+      return data.title is string &&
+        data.title.size() > 0 &&
+        data.title.size() <= 200;
+    }
+
+    function isValidPackagePayload(data) {
+      return data.name is string &&
+        data.name.size() > 0 &&
+        data.name.size() <= 120 &&
+        data.price is string &&
+        data.price.size() <= 60;
+    }
+
+    function isValidAddOnPayload(data) {
+      return data.name is string &&
+        data.name.size() > 0 &&
+        data.name.size() <= 120 &&
+        data.price is string &&
+        data.price.size() <= 60;
+    }
+
+    function isValidInquiryPayload(data) {
+      return data.name is string &&
+        data.name.size() > 0 &&
+        data.name.size() <= 150 &&
+        data.email is string &&
+        data.email.size() >= 3 &&
+        data.email.size() <= 200 &&
+        data.message is string &&
+        data.message.size() > 0 &&
+        data.message.size() <= 4000;
+    }
+
+    function isValidSettingsPayload(data) {
+      return data.businessName is string &&
+        data.businessName.size() > 0 &&
+        data.businessName.size() <= 150 &&
+        data.email is string &&
+        data.email.size() <= 200;
+    }
+
+    match /projects/{projectId} {
+      allow get, list: if true;
+      allow create, update: if isValidProjectPayload(request.resource.data);
+      allow delete: if true;
+    }
+
+    match /services/{serviceId} {
+      allow get, list: if true;
+      allow create, update: if isValidServicePayload(request.resource.data);
+      allow delete: if true;
+    }
+
+    match /packages/{packageId} {
+      allow get, list: if true;
+      allow create, update: if isValidPackagePayload(request.resource.data);
+      allow delete: if true;
+    }
+
+    match /addons/{addOnId} {
+      allow get, list: if true;
+      allow create, update: if isValidAddOnPayload(request.resource.data);
+      allow delete: if true;
+    }
+
+    match /contactRequests/{requestId} {
+      allow get, list: if true;
+      allow create, update: if isValidInquiryPayload(request.resource.data);
+      allow delete: if true;
+    }
+
+    match /adminSettings/{docId} {
+      allow get, list: if true;
+      allow create, update: if isValidSettingsPayload(request.resource.data);
+      allow delete: if true;
+    }
+
+    match /users/{userId} {
+      allow get, list: if true;
+      allow create, update, delete: if true;
+    }
+  }
+}

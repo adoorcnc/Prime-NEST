@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F5F5F7;
+  --ink-obsidian: #0B0B0F;
+  --text-primary: #111111;
+  --text-secondary: #52525B;
+  --text-muted: #71717A;
+  --accent-color: #6C4EFF;
+  --accent-hover: #5839EE;
+  --border-hairline: #E4E4E7;
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.03em;
+  }
+
+  .font-mono-tech {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Architectural hairline grid background */
+.bg-studio-grid {
+  background-size: 48px 48px;
+  background-image: 
+    linear-gradient(to right, rgba(11, 11, 15, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 11, 15, 0.04) 1px, transparent 1px);
+}
+
+.bg-studio-grid-dark {
+  background-size: 48px 48px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+}
+
+/* Dynamic accent utilities */
+.bg-accent {
+  background-color: var(--accent-color);
+}
+.bg-accent:hover {
+  filter: brightness(0.92);
+}
+.text-accent {
+  color: var(--accent-color);
+}
+.border-accent {
+  border-color: var(--accent-color);
+}
+.ring-accent:focus {
+  --tw-ring-color: var(--accent-color);
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

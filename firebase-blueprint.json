@@ -1,0 +1,228 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "A portfolio project created by PrimeNEST.",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string", "description": "Unique identifier for the project" },
+        "projectName": { "type": "string", "description": "Title of the project" },
+        "clientName": { "type": "string", "description": "Client or business name" },
+        "slug": { "type": "string", "description": "URL-friendly slug" },
+        "category": {
+          "type": "string",
+          "enum": ["Business", "E-commerce", "Portfolio", "Custom", "Redesign"],
+          "description": "Project category"
+        },
+        "description": { "type": "string", "description": "Short project summary for cards" },
+        "fullDescription": { "type": "string", "description": "Detailed case study overview" },
+        "coverImage": { "type": "string", "description": "Cover image URL or path" },
+        "galleryImages": {
+          "type": "array",
+          "description": "Additional showcase image URLs"
+        },
+        "services": {
+          "type": "array",
+          "description": "List of services provided"
+        },
+        "technologies": {
+          "type": "array",
+          "description": "List of technologies used"
+        },
+        "year": { "type": "string", "description": "Completion year" },
+        "domain": { "type": "string", "description": "Client website domain name (either domain or liveUrl is sufficient)" },
+        "liveUrl": { "type": "string", "description": "Live client website URL if public (either domain or liveUrl is sufficient)" },
+        "status": {
+          "type": "string",
+          "enum": ["Draft", "Published", "Private", "Archived"],
+          "description": "Publication status of the project"
+        },
+        "featured": { "type": "boolean", "description": "Whether the project appears on the homepage" },
+        "seoTitle": { "type": "string", "description": "Custom SEO title for the project page" },
+        "seoDescription": { "type": "string", "description": "Custom meta description for SEO" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last update timestamp" }
+      },
+      "required": [
+        "projectId",
+        "projectName",
+        "clientName",
+        "slug",
+        "category",
+        "description",
+        "coverImage",
+        "services",
+        "technologies",
+        "year",
+        "status",
+        "featured",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "ServiceItem": {
+      "title": "ServiceItem",
+      "description": "A web development or design service offered by PrimeNEST.",
+      "type": "object",
+      "properties": {
+        "serviceId": { "type": "string", "description": "Unique identifier for the service" },
+        "title": { "type": "string", "description": "Service name" },
+        "description": { "type": "string", "description": "Short description of the service" },
+        "whatItEntails": { "type": "string", "description": "Detailed explanation of what the service entails" },
+        "typicalProcess": {
+          "type": "array",
+          "description": "Typical process steps for this service"
+        },
+        "clientBenefits": {
+          "type": "array",
+          "description": "Key benefits for the client"
+        },
+        "deliverables": {
+          "type": "array",
+          "description": "Key deliverables included in this service"
+        },
+        "iconName": { "type": "string", "description": "Identifier for the service icon" },
+        "order": { "type": "number", "description": "Display order" },
+        "active": { "type": "boolean", "description": "Whether the service is actively displayed" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last update timestamp" }
+      },
+      "required": ["serviceId", "title", "description", "deliverables", "iconName", "order", "active", "updatedAt"]
+    },
+    "PricingPackage": {
+      "title": "PricingPackage",
+      "description": "A website development package offered by PrimeNEST.",
+      "type": "object",
+      "properties": {
+        "packageId": { "type": "string", "description": "Unique package ID" },
+        "name": { "type": "string", "description": "Package tier name" },
+        "price": { "type": "string", "description": "Formatted package price" },
+        "subtitle": { "type": "string", "description": "Target audience description" },
+        "badge": { "type": "string", "description": "Highlight badge" },
+        "tierStyle": {
+          "type": "string",
+          "enum": ["simple", "standard", "popular", "recommended", "premium", "elite"],
+          "description": "Visual presentation tier"
+        },
+        "features": {
+          "type": "array",
+          "description": "Included features"
+        },
+        "deliveryTime": { "type": "string", "description": "Estimated delivery window" },
+        "order": { "type": "number", "description": "Display sort order" },
+        "active": { "type": "boolean", "description": "Whether package is visible" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last updated timestamp" }
+      },
+      "required": ["packageId", "name", "price", "subtitle", "tierStyle", "features", "deliveryTime", "order", "active", "updatedAt"]
+    },
+    "AddOnItem": {
+      "title": "AddOnItem",
+      "description": "An optional add-on service.",
+      "type": "object",
+      "properties": {
+        "addOnId": { "type": "string", "description": "Unique add-on ID" },
+        "name": { "type": "string", "description": "Add-on title" },
+        "price": { "type": "string", "description": "Add-on price string" },
+        "order": { "type": "number", "description": "Sort order" },
+        "active": { "type": "boolean", "description": "Whether active" }
+      },
+      "required": ["addOnId", "name", "price", "order", "active"]
+    },
+    "ContactRequest": {
+      "title": "ContactRequest",
+      "description": "A project inquiry submitted by a potential client.",
+      "type": "object",
+      "properties": {
+        "requestId": { "type": "string", "description": "Unique ID for the inquiry" },
+        "name": { "type": "string", "description": "Visitor full name" },
+        "businessName": { "type": "string", "description": "Visitor business or brand name" },
+        "email": { "type": "string", "format": "email", "description": "Contact email address" },
+        "phone": { "type": "string", "description": "Contact phone or WhatsApp number" },
+        "service": { "type": "string", "description": "Requested service category" },
+        "selectedPackage": { "type": "string", "description": "Selected package tier if any" },
+        "budget": { "type": "string", "description": "Estimated project budget range" },
+        "message": { "type": "string", "description": "Project details and message" },
+        "status": {
+          "type": "string",
+          "enum": ["New", "In Progress", "Responded", "Archived"],
+          "description": "Inquiry review status"
+        },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Submission timestamp" }
+      },
+      "required": ["requestId", "name", "email", "service", "message", "status", "createdAt"]
+    },
+    "AdminSettings": {
+      "title": "AdminSettings",
+      "description": "Global studio settings, contact numbers, and verified metrics for PrimeNEST.",
+      "type": "object",
+      "properties": {
+        "businessName": { "type": "string", "description": "Public brand name" },
+        "tagline": { "type": "string", "description": "Primary studio positioning line" },
+        "email": { "type": "string", "description": "Public contact email" },
+        "phone": { "type": "string", "description": "Public phone number" },
+        "whatsapp": { "type": "string", "description": "WhatsApp number in international format" },
+        "instagram": { "type": "string", "description": "Instagram profile URL" },
+        "facebook": { "type": "string", "description": "Facebook page URL" },
+        "logo": { "type": "string", "description": "Logo URL or text mark" },
+        "primaryColor": { "type": "string", "description": "Primary obsidian hex color" },
+        "accentColor": { "type": "string", "description": "Hex accent color (default #6C4EFF)" },
+        "statsProjectsCompleted": { "type": "string", "description": "Projects completed counter" },
+        "statsWebsitesPublished": { "type": "string", "description": "Websites published counter" },
+        "statsHappyClients": { "type": "string", "description": "Happy clients counter" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last updated timestamp" }
+      },
+      "required": [
+        "businessName",
+        "email",
+        "phone",
+        "whatsapp",
+        "accentColor",
+        "statsProjectsCompleted",
+        "statsWebsitesPublished",
+        "statsHappyClients",
+        "updatedAt"
+      ]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User role record for administrative access control.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "description": "User email" },
+        "role": { "type": "string", "enum": ["admin", "viewer"], "description": "Access role" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation date" }
+      },
+      "required": ["uid", "email", "role", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/projects/{projectId}": {
+      "schema": "#/entities/Project",
+      "description": "Portfolio projects showcased on PrimeNEST."
+    },
+    "/services/{serviceId}": {
+      "schema": "#/entities/ServiceItem",
+      "description": "Web design and development services offered by PrimeNEST."
+    },
+    "/packages/{packageId}": {
+      "schema": "#/entities/PricingPackage",
+      "description": "Pricing packages offered by PrimeNEST."
+    },
+    "/addons/{addOnId}": {
+      "schema": "#/entities/AddOnItem",
+      "description": "Optional add-ons for website packages."
+    },
+    "/contactRequests/{requestId}": {
+      "schema": "#/entities/ContactRequest",
+      "description": "Client project inquiries submitted through the Contact page."
+    },
+    "/adminSettings/{docId}": {
+      "schema": "#/entities/AdminSettings",
+      "description": "Studio configuration including WhatsApp number, accent color, and About statistics."
+    },
+    "/users/{userId}": {
+      "schema": "#/entities/UserProfile",
+      "description": "Admin user profiles and roles."
+    }
+  }
+}

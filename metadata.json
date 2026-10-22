@@ -1,0 +1,6 @@
+{
+  "name": "PrimeNEST",
+  "description": "PrimeNEST is a modern website design and development studio creating responsive, professional websites and custom web applications for businesses, brands, and individuals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
